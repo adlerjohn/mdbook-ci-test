@@ -13,6 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Get branch
+        id: branch_name
+        run: |
+          echo ::set-output name=BRANCH_NAME::${GITHUB_REF#refs/*/}
+
       - name: Setup mdBook
         uses: peaceiris/actions-mdbook@v1
         with:
@@ -25,4 +30,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/book
-
+          destination_dir: ${{ steps.branch_name.outputs.BRANCH_NAME }}
