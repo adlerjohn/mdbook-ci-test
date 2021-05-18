@@ -26,7 +26,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/book
           destination_dir: latest
-        if: github.ref == refs/heads/master
+        if: startsWith(github.ref, refs/heads/master)
 
       - name: Get tag
         id: branch_name
